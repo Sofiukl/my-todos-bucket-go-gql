@@ -1,0 +1,38 @@
+type Bucket {
+  id: ID!
+  name: String!
+  category: String
+}
+
+type User {
+  id: ID!
+  name: String!
+}
+
+input RefreshTokenInput{
+  token: String!
+}
+
+input NewUser {
+  username: String!
+  password: String!
+}
+
+input Login {
+  username: String!
+  password: String!
+}
+
+# The Root Query for the application
+type Query {
+  recentBuckets(count: Int, offset: Int): [Bucket]
+}
+
+# The Root Mutation for the application
+type Mutation {
+  createBucket(name: String!, category: String): Bucket!
+  createUser(input: NewUser!): String!
+  login(input: Login!): String!
+  # we'll talk about this in authentication section
+  refreshToken(input: RefreshTokenInput!): String!
+}
